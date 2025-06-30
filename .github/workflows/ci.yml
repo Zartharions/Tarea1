@@ -1,0 +1,26 @@
+name: CI - Validación Básica
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Validar existencia de index.html
+        run: |
+          if [ -f "index.html" ]; then
+            echo "index.html encontrado correctamente"
+          else
+            echo "index.html NO encontrado"
+            exit 1
+          fi
+
+      - name: Mensaje de éxito
+        run: echo "Todo correcto"
